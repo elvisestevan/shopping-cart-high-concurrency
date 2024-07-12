@@ -15,6 +15,7 @@ API that handle shopping carts with high concurrency of customers trying to buy 
 - [ ] Endpoint #4 FOR UPDATE locking
 - [ ] Endpoint #5 Optimistic Locking
 - [ ] Endpoint #6 Kafka sharding by product_id
+- [ ] Endpoint #7 Create another table to store all items in stock
 
 ### Functional Requirements
 - Create a cart
@@ -49,3 +50,6 @@ This endpoint handle concurrency with optmistic locking (versioning product)
 
 ###### Endpoint #6 Kafka sharding by product_id
 This endpoint handle concurrency with kafka sharding by product_id
+
+###### Endpoint #7 Create another table to store all items in stock
+This endpoint will write in a previous created table that will be using to store items individually, for example, if the product X has quantity of 10 available, in that new table will have 10 rows as "not reserved"
