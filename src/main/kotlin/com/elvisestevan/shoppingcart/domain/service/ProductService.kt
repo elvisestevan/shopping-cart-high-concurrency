@@ -12,9 +12,12 @@ class ProductService(
     fun findAll(): List<Product> =
         productRepository.findAll()
 
-    fun makeReservation(productId: String, quantity: Int) {
+    fun findById(productId: String): Product =
+        productRepository.findById(productId)
+
+    fun makeReservation(productId: String, quantity: Int): Product{
         val product = productRepository.findById(productId)
-        productRepository.save(
+        return productRepository.save(
             product.copy(
                 totalAvailableInStock = product.totalAvailableInStock - quantity
             )

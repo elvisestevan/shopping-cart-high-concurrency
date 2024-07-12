@@ -20,8 +20,8 @@ class ProductController (
     }
 
     @PostMapping("/products/{productId}/reservations")
-    fun makeReservation(@PathVariable productId: String, @RequestBody request: ReservationRequest) {
-        productService.makeReservation(productId, request.quantity)
+    fun makeReservation(@PathVariable productId: String, @RequestBody request: ReservationRequest): ProductResponse {
+        return productService.makeReservation(productId, request.quantity).let { ProductResponse.fromDomain(it) }
     }
 
 }
