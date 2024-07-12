@@ -1,5 +1,6 @@
 package com.elvisestevan.shoppingcart.resources.database.entity
 
+import com.elvisestevan.shoppingcart.domain.entity.Product as ProductDomain
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.Id
@@ -25,4 +26,22 @@ data class Product(
     @Column
     val totalInStock: Int,
 
+) {
+    companion object {
+        fun fromDomain(product: com.elvisestevan.shoppingcart.domain.entity.Product) = Product(
+            id = product.id,
+            name = product.name,
+            description = product.description,
+            totalInStock = product.totalInStock,
+            totalAvailableInStock = product.totalAvailableInStock,
+        )
+    }
+}
+
+fun Product.toDomain() = ProductDomain(
+    id = this.id,
+    name = this.name,
+    description = this.description,
+    totalInStock = this.totalInStock,
+    totalAvailableInStock = this.totalAvailableInStock,
 )

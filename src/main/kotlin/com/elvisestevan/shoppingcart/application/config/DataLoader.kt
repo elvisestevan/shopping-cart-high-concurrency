@@ -1,7 +1,7 @@
 package com.elvisestevan.shoppingcart.application.config
 
 import com.elvisestevan.shoppingcart.resources.database.entity.Product
-import com.elvisestevan.shoppingcart.resources.database.repository.ProductJPARepository
+import com.elvisestevan.shoppingcart.resources.database.repository.jpa.ProductJPARepository
 import org.springframework.boot.CommandLineRunner
 import org.springframework.stereotype.Component
 

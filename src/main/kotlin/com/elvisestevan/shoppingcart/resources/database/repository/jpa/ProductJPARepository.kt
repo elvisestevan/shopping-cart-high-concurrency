@@ -1,4 +1,4 @@
-package com.elvisestevan.shoppingcart.resources.database.repository
+package com.elvisestevan.shoppingcart.resources.database.repository.jpa
 
 import com.elvisestevan.shoppingcart.resources.database.entity.Product
 import org.springframework.data.repository.CrudRepository
