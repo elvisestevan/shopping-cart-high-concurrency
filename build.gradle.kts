@@ -3,6 +3,7 @@ plugins {
   id("io.spring.dependency-management") version "1.1.5"
   kotlin("jvm") version "1.9.24"
   kotlin("plugin.spring") version "1.9.24"
+  kotlin("plugin.jpa") version "1.9.24"
 }
 
 group = "com.elvisestevan"
@@ -20,6 +21,7 @@ repositories {
 
 dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
+	implementation("org.jetbrains.kotlin:kotlin-noarg")
 
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
