@@ -3,7 +3,8 @@ API that handle shopping carts with high concurrency of customers trying to buy 
 
 ### TODO List
 - [X] Spring Boot Web
-- [ ] Docker postgres
+- [X] Docker postgres
+- [ ] Data test
 - [ ] Endpoint #1 Naive Implementation
 - [ ] Endpoint metrics exporting default metrics of JVM and HTTP
 - [ ] Docker prometheus
