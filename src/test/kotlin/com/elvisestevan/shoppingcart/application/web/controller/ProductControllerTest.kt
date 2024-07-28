@@ -6,7 +6,6 @@ import com.elvisestevan.shoppingcart.application.web.dto.response.ProductRespons
 import com.elvisestevan.shoppingcart.resources.database.entity.toDomain
 import org.junit.jupiter.api.Test
 import org.springframework.http.MediaType
-import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 
