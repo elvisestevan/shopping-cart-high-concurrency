@@ -1,3 +1,5 @@
+server:
+  port: 7000
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres
@@ -9,3 +11,20 @@ spring:
       show-sql: true
   application:
     name: shopping-cart-high-concurrency
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+  endpoints:
+    web:
+      exposure:
+        include: prometheus
+  metrics:
+    distribution:
+      percentiles-histogram:
+        http:
+          server:
+            requests: true
+logging:
+  pattern:
+    level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"
