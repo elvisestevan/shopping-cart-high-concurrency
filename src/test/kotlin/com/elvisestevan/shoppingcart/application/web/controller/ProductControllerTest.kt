@@ -10,39 +10,35 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 
 class ProductControllerTest : ShoppingCartHighConcurrencyApplicationTests() {
-
     @Test
     fun `should get all products successfully`() {
-
         val response = DataLoader.data.map { ProductResponse.fromDomain(it.toDomain()) }
 
         mockMvc.perform(
-            MockMvcRequestBuilders.get("/products")
+            MockMvcRequestBuilders.get("/products"),
         )
             .andExpect(MockMvcResultMatchers.status().isOk)
             .andExpect(
-                MockMvcResultMatchers.content().json(mapper.writeValueAsString(response))
+                MockMvcResultMatchers.content().json(mapper.writeValueAsString(response)),
             )
-
     }
 
     @Test
     fun `should make a reservation successfully`() {
-
         val productId = "01J2M55YGRHWV1T72MK3PQXBYS"
 
-        val response = DataLoader.data.first { it.id == productId }
-            .copy(totalAvailableInStock = 9999999)
+        val response =
+            DataLoader.data.first { it.id == productId }
+                .copy(totalAvailableInStock = 9999999)
 
         mockMvc.perform(
             MockMvcRequestBuilders.post("/products/$productId/reservations")
                 .content("{ \"quantity\": 1 }")
-                .contentType(MediaType.APPLICATION_JSON)
+                .contentType(MediaType.APPLICATION_JSON),
         )
             .andExpect(MockMvcResultMatchers.status().isOk)
             .andExpect(
-                MockMvcResultMatchers.content().json(mapper.writeValueAsString(response))
+                MockMvcResultMatchers.content().json(mapper.writeValueAsString(response)),
             )
-
     }
 }

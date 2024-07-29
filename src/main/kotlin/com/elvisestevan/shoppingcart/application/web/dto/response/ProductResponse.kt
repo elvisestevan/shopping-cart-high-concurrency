@@ -10,13 +10,13 @@ class ProductResponse(
     val totalInStock: Int,
 ) {
     companion object {
-        fun fromDomain(product: Product) = ProductResponse(
-            id = product.id,
-            name = product.name,
-            description = product.description,
-            totalInStock = product.totalInStock,
-            totalAvailableInStock = product.totalAvailableInStock,
-        )
+        fun fromDomain(product: Product) =
+            ProductResponse(
+                id = product.id,
+                name = product.name,
+                description = product.description,
+                totalInStock = product.totalInStock,
+                totalAvailableInStock = product.totalAvailableInStock,
+            )
     }
 }
-

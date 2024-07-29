@@ -7,5 +7,5 @@ import org.springframework.boot.runApplication
 class ShoppingCartHighConcurrencyApplication
 
 fun main(args: Array<String>) {
-	runApplication<ShoppingCartHighConcurrencyApplication>(*args)
+    runApplication<ShoppingCartHighConcurrencyApplication>(*args)
 }

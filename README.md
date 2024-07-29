@@ -10,8 +10,8 @@ API that handle shopping carts with high concurrency of customers trying to buy 
 - [X] Docker prometheus
 - [X] Docker grafana
 - [X] Dashboard on grafana with Logs, traces and metrics
-- [ ] Dashboard on grafana with JVM metrics
-- [ ] Dashboard on grafana with HTTP metrics
+- [X] Dashboard on grafana with JVM metrics
+- [X] Dashboard on grafana with HTTP metrics
 - [ ] Lint
 - [ ] Endpoint #2 Read Committed Locking (implementation, tests, report)
 - [ ] Endpoint #3 Serializable Locking (implementation, tests, report)

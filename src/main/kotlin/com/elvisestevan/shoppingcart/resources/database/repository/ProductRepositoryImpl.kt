@@ -10,16 +10,12 @@ import com.elvisestevan.shoppingcart.resources.database.entity.Product as Produc
 
 @Repository
 class ProductRepositoryImpl(
-    private val productJPARepository: ProductJPARepository
+    private val productJPARepository: ProductJPARepository,
 ) : ProductRepository {
-    override fun findAll(): List<Product> =
-        productJPARepository.findAll().map { it.toDomain() }
+    override fun findAll(): List<Product> = productJPARepository.findAll().map { it.toDomain() }
 
-    override fun findById(id: String): Product =
-        productJPARepository.findById(id).get().toDomain()
+    override fun findById(id: String): Product = productJPARepository.findById(id).get().toDomain()
 
     @Observed
-    override fun save(product: Product): Product =
-        productJPARepository.save(ProductEntity.fromDomain(product)).toDomain()
-
+    override fun save(product: Product): Product = productJPARepository.save(ProductEntity.fromDomain(product)).toDomain()
 }
