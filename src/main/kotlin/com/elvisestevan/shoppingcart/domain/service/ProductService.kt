@@ -17,6 +17,12 @@ class ProductService(
         quantity: Int,
     ): Product {
         val product = productRepository.findById(productId)
+        if (product.totalAvailableInStock < quantity) {
+            throw Exception(
+                "error on making reservation, total available is ${product.totalAvailableInStock} " +
+                    "and you're trying to make a reservation of $quantity items",
+            )
+        }
         return productRepository.save(
             product.copy(
                 totalAvailableInStock = product.totalAvailableInStock - quantity,

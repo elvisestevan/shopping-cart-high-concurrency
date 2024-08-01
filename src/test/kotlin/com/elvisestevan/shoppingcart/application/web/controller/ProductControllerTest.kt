@@ -15,7 +15,7 @@ class ProductControllerTest : ShoppingCartHighConcurrencyApplicationTests() {
         val response = DataLoader.data.map { ProductResponse.fromDomain(it.toDomain()) }
 
         mockMvc.perform(
-            MockMvcRequestBuilders.get("/products"),
+            MockMvcRequestBuilders.get("/api/v1/products"),
         )
             .andExpect(MockMvcResultMatchers.status().isOk)
             .andExpect(
@@ -32,7 +32,7 @@ class ProductControllerTest : ShoppingCartHighConcurrencyApplicationTests() {
                 .copy(totalAvailableInStock = 9999999)
 
         mockMvc.perform(
-            MockMvcRequestBuilders.post("/products/$productId/reservations")
+            MockMvcRequestBuilders.post("/api/v1/products/$productId/reservations")
                 .content("{ \"quantity\": 1 }")
                 .contentType(MediaType.APPLICATION_JSON),
         )
@@ -40,5 +40,17 @@ class ProductControllerTest : ShoppingCartHighConcurrencyApplicationTests() {
             .andExpect(
                 MockMvcResultMatchers.content().json(mapper.writeValueAsString(response)),
             )
+    }
+
+    @Test
+    fun `should throw an exception when try to make a reservation of a quantity greater than available`() {
+        val productId = "01J2M55YGRHWV1T72MK3PQXBYS"
+
+        mockMvc.perform(
+            MockMvcRequestBuilders.post("/api/v1/products/$productId/reservations")
+                .content("{ \"quantity\": 10000000 }")
+                .contentType(MediaType.APPLICATION_JSON),
+        )
+            .andExpect(MockMvcResultMatchers.status().isInternalServerError)
     }
 }

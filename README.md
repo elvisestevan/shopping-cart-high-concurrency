@@ -12,7 +12,7 @@ API that handle shopping carts with high concurrency of customers trying to buy 
 - [X] Dashboard on grafana with Logs, traces and metrics
 - [X] Dashboard on grafana with JVM metrics
 - [X] Dashboard on grafana with HTTP metrics
-- [ ] Lint
+- [X] Lint
 - [ ] Endpoint #2 Read Committed Locking (implementation, tests, report)
 - [ ] Endpoint #3 Serializable Locking (implementation, tests, report)
 - [ ] Endpoint #4 FOR UPDATE locking (implementation, tests, report)
