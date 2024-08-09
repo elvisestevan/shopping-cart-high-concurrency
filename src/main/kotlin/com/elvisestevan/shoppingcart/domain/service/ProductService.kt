@@ -1,12 +1,16 @@
 package com.elvisestevan.shoppingcart.domain.service
 
 import com.elvisestevan.shoppingcart.domain.entity.Product
+import com.elvisestevan.shoppingcart.domain.entity.ProductReservation
 import com.elvisestevan.shoppingcart.domain.repository.ProductRepository
+import com.elvisestevan.shoppingcart.domain.repository.ProductReservationRepository
+import de.huxhorn.sulky.ulid.ULID
 import org.springframework.stereotype.Service
 
 @Service
 class ProductService(
     private val productRepository: ProductRepository,
+    private val productReservationRepository: ProductReservationRepository,
 ) {
     fun findAll(): List<Product> = productRepository.findAll()
 
@@ -23,6 +27,7 @@ class ProductService(
                     "and you're trying to make a reservation of $quantity items",
             )
         }
+        productReservationRepository.save(ProductReservation(ULID().nextULID(), product, quantity))
         return productRepository.save(
             product.copy(
                 totalAvailableInStock = product.totalAvailableInStock - quantity,
