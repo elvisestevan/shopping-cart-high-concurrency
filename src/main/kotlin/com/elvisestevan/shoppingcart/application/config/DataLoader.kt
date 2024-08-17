@@ -31,8 +31,8 @@ class DataLoader(
                     "Monitor",
                     "Full HD monitor with 1920x1080 resolution and AOC brand technology; ideal for webinars, " +
                         "meetings, digital work, entertainment, and more",
-                    10000000,
-                    10000000,
+                    6000,
+                    6000,
                 ),
                 Product(
                     "01J2M5B4XR1XGSWRXB5BXTGMHA",

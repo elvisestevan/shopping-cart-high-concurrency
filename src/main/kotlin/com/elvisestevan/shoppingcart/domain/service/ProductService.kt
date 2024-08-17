@@ -5,13 +5,14 @@ import com.elvisestevan.shoppingcart.domain.entity.ProductReservation
 import com.elvisestevan.shoppingcart.domain.repository.ProductRepository
 import com.elvisestevan.shoppingcart.domain.repository.ProductReservationRepository
 import de.huxhorn.sulky.ulid.ULID
+import io.micrometer.observation.annotation.Observed
 import org.springframework.http.HttpStatusCode
 import org.springframework.stereotype.Service
-import org.springframework.transaction.annotation.Isolation
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.server.ResponseStatusException
 
 @Service
+@Observed
 class ProductService(
     private val productRepository: ProductRepository,
     private val productReservationRepository: ProductReservationRepository,
@@ -20,7 +21,7 @@ class ProductService(
 
     fun findById(productId: String): Product = productRepository.findById(productId)
 
-    @Transactional(isolation = Isolation.REPEATABLE_READ)
+    @Transactional
     fun makeReservation(
         productId: String,
         quantity: Int,

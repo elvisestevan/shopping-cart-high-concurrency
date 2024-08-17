@@ -13,12 +13,10 @@ API that handle shopping carts with high concurrency of customers trying to buy 
 - [X] Dashboard on grafana with JVM metrics
 - [X] Dashboard on grafana with HTTP metrics
 - [X] Lint
-- [ ] Endpoint #2 Read Committed Locking (implementation, tests, report)
-- [ ] Endpoint #3 Serializable Locking (implementation, tests, report)
-- [ ] Endpoint #4 FOR UPDATE locking (implementation, tests, report)
-- [ ] Endpoint #5 Optimistic Locking (implementation, tests, report)
-- [ ] Endpoint #6 Create another table to store all items in stock (implementation, tests, report)
-- [ ] Endpoint #7 Kafka sharding by product_id (implementation, tests, report)
+- [ ] Endpoint #2 FOR UPDATE locking (implementation, tests, report)
+- [ ] Endpoint #3 Optimistic Locking (implementation, tests, report)
+- [ ] Endpoint #4 Create another table to store all items in stock (implementation, tests, report)
+- [ ] Endpoint #5 Kafka sharding by product_id (implementation, tests, report)
 
 ### Functional Requirements
 - Create a cart
@@ -39,20 +37,14 @@ API that handle shopping carts with high concurrency of customers trying to buy 
 ###### Endpoint #1 Naive Implementation
 This endpoint just add a product to a cart without any concern of concurrency
 
-###### Endpoint #2 Read Committed Locking
-This endpoint handle concurrency with read committed locking
-
-###### Endpoint #3 Serializable Locking
-This endpoint handle concurrency with serializable locking
-
-###### Endpoint #4 FOR UPDATE locking
+###### Endpoint #2 FOR UPDATE locking
 This endpoint handle concurrency with FOR UPDATE (PostgreSQL) locking
 
-###### Endpoint #5 Optimistic Locking
+###### Endpoint #3 Optimistic Locking
 This endpoint handle concurrency with optmistic locking (versioning product)
 
-###### Endpoint #6 Kafka sharding by product_id
+###### Endpoint #4 Kafka sharding by product_id
 This endpoint handle concurrency with kafka sharding by product_id
 
-###### Endpoint #7 Create another table to store all items in stock
+###### Endpoint #5 Create another table to store all items in stock
 This endpoint will write in a previous created table that will be using to store items individually, for example, if the product X has quantity of 10 available, in that new table will have 10 rows as "not reserved"

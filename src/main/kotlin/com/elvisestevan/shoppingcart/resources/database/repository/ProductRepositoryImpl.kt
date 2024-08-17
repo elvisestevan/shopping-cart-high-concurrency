@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository
 import com.elvisestevan.shoppingcart.resources.database.entity.Product as ProductEntity
 
 @Repository
+@Observed
 class ProductRepositoryImpl(
     private val productJPARepository: ProductJPARepository,
 ) : ProductRepository {
@@ -16,6 +17,5 @@ class ProductRepositoryImpl(
 
     override fun findById(id: String): Product = productJPARepository.findById(id).get().toDomain()
 
-    @Observed
     override fun save(product: Product): Product = productJPARepository.save(ProductEntity.fromDomain(product)).toDomain()
 }

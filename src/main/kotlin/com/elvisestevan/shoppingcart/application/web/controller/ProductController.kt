@@ -3,6 +3,7 @@ package com.elvisestevan.shoppingcart.application.web.controller
 import com.elvisestevan.shoppingcart.application.web.dto.request.ReservationRequest
 import com.elvisestevan.shoppingcart.application.web.dto.response.ProductResponse
 import com.elvisestevan.shoppingcart.domain.service.ProductService
+import io.micrometer.observation.annotation.Observed
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.web.bind.annotation.GetMapping
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/api/v2/products")
+@Observed
 class ProductController(
     private val productService: ProductService,
 ) {

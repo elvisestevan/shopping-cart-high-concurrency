@@ -25,7 +25,7 @@ class ProductControllerTest : ShoppingCartHighConcurrencyApplicationTests() {
         val response = DataLoader.data.map { ProductResponse.fromDomain(it.toDomain()) }
 
         mockMvc.perform(
-            MockMvcRequestBuilders.get("/api/v1/products"),
+            MockMvcRequestBuilders.get("/api/v2/products"),
         )
             .andExpect(MockMvcResultMatchers.status().isOk)
             .andExpect(
@@ -42,7 +42,7 @@ class ProductControllerTest : ShoppingCartHighConcurrencyApplicationTests() {
                 .copy(totalAvailableInStock = 999)
 
         mockMvc.perform(
-            MockMvcRequestBuilders.post("/api/v1/products/$productId/reservations")
+            MockMvcRequestBuilders.post("/api/v2/products/$productId/reservations")
                 .content("{ \"quantity\": 1 }")
                 .contentType(MediaType.APPLICATION_JSON),
         )
@@ -57,7 +57,7 @@ class ProductControllerTest : ShoppingCartHighConcurrencyApplicationTests() {
         val productId = "01J2M55YGRHWV1T72MK3PQXBYS"
 
         mockMvc.perform(
-            MockMvcRequestBuilders.post("/api/v1/products/$productId/reservations")
+            MockMvcRequestBuilders.post("/api/v2/products/$productId/reservations")
                 .content("{ \"quantity\": 10000000 }")
                 .contentType(MediaType.APPLICATION_JSON),
         )

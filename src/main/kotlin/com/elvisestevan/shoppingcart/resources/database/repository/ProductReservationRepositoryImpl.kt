@@ -9,10 +9,10 @@ import org.springframework.stereotype.Repository
 import com.elvisestevan.shoppingcart.resources.database.entity.ProductReservation as ProductReservationEntity
 
 @Repository
+@Observed
 class ProductReservationRepositoryImpl(
     private val productReservationJPARepository: ProductReservationJPARepository,
 ) : ProductReservationRepository {
-    @Observed
     override fun save(productReservation: ProductReservation): ProductReservation =
         productReservationJPARepository.save(ProductReservationEntity.fromDomain(productReservation)).toDomain()
 }
