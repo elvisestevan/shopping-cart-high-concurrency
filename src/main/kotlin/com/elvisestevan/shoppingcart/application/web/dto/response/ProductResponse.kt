@@ -1,6 +1,7 @@
 package com.elvisestevan.shoppingcart.application.web.dto.response
 
 import com.elvisestevan.shoppingcart.domain.entity.Product
+import java.time.LocalDateTime
 
 class ProductResponse(
     val id: String,

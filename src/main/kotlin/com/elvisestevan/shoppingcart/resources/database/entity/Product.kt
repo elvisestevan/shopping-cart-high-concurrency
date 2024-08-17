@@ -1,9 +1,10 @@
 package com.elvisestevan.shoppingcart.resources.database.entity
 
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.Id
-import jakarta.persistence.Table
+import jakarta.persistence.*
+import org.hibernate.annotations.CreationTimestamp
+import org.hibernate.annotations.UpdateTimestamp
+import java.time.LocalDateTime
+import java.time.LocalDateTime.now
 import com.elvisestevan.shoppingcart.domain.entity.Product as ProductDomain
 
 @Entity
@@ -20,6 +21,12 @@ data class Product(
     val totalAvailableInStock: Int,
     @Column
     val totalInStock: Int,
+    @CreationTimestamp
+    val createdAt: LocalDateTime = now(),
+    @UpdateTimestamp
+    val updatedAt: LocalDateTime = now(),
+    @Version
+    val version: Long,
 ) {
     companion object {
         fun fromDomain(product: com.elvisestevan.shoppingcart.domain.entity.Product) =
@@ -29,6 +36,9 @@ data class Product(
                 description = product.description,
                 totalInStock = product.totalInStock,
                 totalAvailableInStock = product.totalAvailableInStock,
+                createdAt = product.createdAt,
+                updatedAt = product.updatedAt,
+                version = product.version,
             )
     }
 }
@@ -40,4 +50,7 @@ fun Product.toDomain() =
         description = this.description,
         totalInStock = this.totalInStock,
         totalAvailableInStock = this.totalAvailableInStock,
+        createdAt = this.createdAt,
+        updatedAt = this.updatedAt,
+        version = this.version,
     )

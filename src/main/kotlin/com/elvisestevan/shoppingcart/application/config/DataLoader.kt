@@ -18,6 +18,7 @@ class DataLoader(
                     "Keyboard with QWERTY layout and low-profile keys for a comfortable, quiet typing experience",
                     1000,
                     1000,
+                    version = 1,
                 ),
                 Product(
                     "01J2M5AYNSCZW28EGVZBGWAQSF",
@@ -25,6 +26,7 @@ class DataLoader(
                     "Computer mouse for easily navigating a computer interface; click, scroll, and more",
                     1000,
                     1000,
+                    version = 1,
                 ),
                 Product(
                     "01J2M5B20RCGYRDMEHSG5NFY1H",
@@ -33,6 +35,7 @@ class DataLoader(
                         "meetings, digital work, entertainment, and more",
                     6000,
                     6000,
+                    version = 1,
                 ),
                 Product(
                     "01J2M5B4XR1XGSWRXB5BXTGMHA",
@@ -41,6 +44,7 @@ class DataLoader(
                         "twist up the cord, and be on your merry way",
                     10000000,
                     10000000,
+                    version = 1,
                 ),
                 Product(
                     "01J2M5B8B8FPS2SFS5MHS6K0SP",
@@ -50,6 +54,7 @@ class DataLoader(
                         "20 ppm black",
                     10000000,
                     10000000,
+                    version = 1,
                 ),
             )
     }

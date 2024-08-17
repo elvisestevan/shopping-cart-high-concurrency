@@ -5,6 +5,7 @@ import com.elvisestevan.shoppingcart.domain.entity.ProductReservation
 import com.elvisestevan.shoppingcart.domain.repository.ProductRepository
 import com.elvisestevan.shoppingcart.domain.repository.ProductReservationRepository
 import de.huxhorn.sulky.ulid.ULID
+import io.github.resilience4j.retry.annotation.Retry
 import io.micrometer.observation.annotation.Observed
 import org.springframework.http.HttpStatusCode
 import org.springframework.stereotype.Service
@@ -22,6 +23,7 @@ class ProductService(
     fun findById(productId: String): Product = productRepository.findById(productId)
 
     @Transactional
+    @Retry(name = "defaultRetry")
     fun makeReservation(
         productId: String,
         quantity: Int,

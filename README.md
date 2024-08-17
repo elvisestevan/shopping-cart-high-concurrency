@@ -13,8 +13,8 @@ API that handle shopping carts with high concurrency of customers trying to buy 
 - [X] Dashboard on grafana with JVM metrics
 - [X] Dashboard on grafana with HTTP metrics
 - [X] Lint
-- [ ] Endpoint #2 FOR UPDATE locking (implementation, tests, report)
-- [ ] Endpoint #3 Optimistic Locking (implementation, tests, report)
+- [X] Endpoint #2 FOR UPDATE locking (implementation, tests, report)
+- [X] Endpoint #3 Optimistic Locking (implementation, tests, report)
 - [ ] Endpoint #4 Create another table to store all items in stock (implementation, tests, report)
 - [ ] Endpoint #5 Kafka sharding by product_id (implementation, tests, report)
 

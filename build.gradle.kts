@@ -34,6 +34,7 @@ dependencies {
     implementation("com.github.loki4j:loki-logback-appender:1.6.0-m1")
     implementation("io.micrometer:micrometer-tracing-bridge-brave")
     implementation("io.zipkin.reporter2:zipkin-reporter-brave")
+    implementation("io.github.resilience4j:resilience4j-spring-boot3:2.2.0")
 
     runtimeOnly("org.postgresql:postgresql")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
