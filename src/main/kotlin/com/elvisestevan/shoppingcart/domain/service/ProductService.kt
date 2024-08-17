@@ -5,7 +5,9 @@ import com.elvisestevan.shoppingcart.domain.entity.ProductReservation
 import com.elvisestevan.shoppingcart.domain.repository.ProductRepository
 import com.elvisestevan.shoppingcart.domain.repository.ProductReservationRepository
 import de.huxhorn.sulky.ulid.ULID
+import org.springframework.http.HttpStatusCode
 import org.springframework.stereotype.Service
+import org.springframework.web.server.ResponseStatusException
 
 @Service
 class ProductService(
@@ -22,7 +24,8 @@ class ProductService(
     ): Product {
         val product = productRepository.findById(productId)
         if (product.totalAvailableInStock < quantity) {
-            throw Exception(
+            throw ResponseStatusException(
+                HttpStatusCode.valueOf(500),
                 "error on making reservation, total available is ${product.totalAvailableInStock} " +
                     "and you're trying to make a reservation of $quantity items",
             )

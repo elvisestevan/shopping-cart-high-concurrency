@@ -23,8 +23,8 @@ class DataLoader(
                     "01J2M5AYNSCZW28EGVZBGWAQSF",
                     "Mouse",
                     "Computer mouse for easily navigating a computer interface; click, scroll, and more",
-                    10000000,
-                    10000000,
+                    1000,
+                    1000,
                 ),
                 Product(
                     "01J2M5B20RCGYRDMEHSG5NFY1H",

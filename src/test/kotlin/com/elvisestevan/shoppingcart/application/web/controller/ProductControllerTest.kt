@@ -5,11 +5,21 @@ import com.elvisestevan.shoppingcart.application.config.DataLoader
 import com.elvisestevan.shoppingcart.application.web.dto.response.ProductResponse
 import com.elvisestevan.shoppingcart.resources.database.entity.toDomain
 import org.junit.jupiter.api.Test
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 
 class ProductControllerTest : ShoppingCartHighConcurrencyApplicationTests() {
+    companion object {
+        private val log: Logger = LoggerFactory.getLogger(ProductControllerTest::class.java)
+    }
+
+    @Autowired
+    private lateinit var productController: ProductController
+
     @Test
     fun `should get all products successfully`() {
         val response = DataLoader.data.map { ProductResponse.fromDomain(it.toDomain()) }
@@ -25,11 +35,11 @@ class ProductControllerTest : ShoppingCartHighConcurrencyApplicationTests() {
 
     @Test
     fun `should make a reservation successfully`() {
-        val productId = "01J2M55YGRHWV1T72MK3PQXBYS"
+        val productId = "01J2M5AYNSCZW28EGVZBGWAQSF"
 
         val response =
             DataLoader.data.first { it.id == productId }
-                .copy(totalAvailableInStock = 9999999)
+                .copy(totalAvailableInStock = 999)
 
         mockMvc.perform(
             MockMvcRequestBuilders.post("/api/v1/products/$productId/reservations")

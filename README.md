@@ -17,8 +17,8 @@ API that handle shopping carts with high concurrency of customers trying to buy 
 - [ ] Endpoint #3 Serializable Locking (implementation, tests, report)
 - [ ] Endpoint #4 FOR UPDATE locking (implementation, tests, report)
 - [ ] Endpoint #5 Optimistic Locking (implementation, tests, report)
-- [ ] Endpoint #6 Kafka sharding by product_id (implementation, tests, report)
-- [ ] Endpoint #7 Create another table to store all items in stock (implementation, tests, report)
+- [ ] Endpoint #6 Create another table to store all items in stock (implementation, tests, report)
+- [ ] Endpoint #7 Kafka sharding by product_id (implementation, tests, report)
 
 ### Functional Requirements
 - Create a cart

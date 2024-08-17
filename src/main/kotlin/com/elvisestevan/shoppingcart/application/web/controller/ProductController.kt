@@ -26,12 +26,20 @@ class ProductController(
         return productService.findAll().map { ProductResponse.fromDomain(it) }
     }
 
+    @GetMapping("/{productId}")
+    fun getProduct(
+        @PathVariable productId: String,
+    ): ProductResponse = productService.findById(productId).let { ProductResponse.fromDomain(it) }
+
     @PostMapping("/{productId}/reservations")
     fun makeReservation(
         @PathVariable productId: String,
         @RequestBody request: ReservationRequest,
     ): ProductResponse {
         log.info("Starting reservation for $productId of ${request.quantity} items")
-        return productService.makeReservation(productId, request.quantity).let { ProductResponse.fromDomain(it) }
+        return productService.makeReservation(productId, request.quantity).let {
+            log.info("Reservation for $productId made successfully, ${it.totalAvailableInStock} remaining")
+            ProductResponse.fromDomain(it)
+        }
     }
 }
