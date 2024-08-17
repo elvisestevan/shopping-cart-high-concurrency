@@ -7,6 +7,8 @@ import com.elvisestevan.shoppingcart.domain.repository.ProductReservationReposit
 import de.huxhorn.sulky.ulid.ULID
 import org.springframework.http.HttpStatusCode
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Isolation
+import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.server.ResponseStatusException
 
 @Service
@@ -18,6 +20,7 @@ class ProductService(
 
     fun findById(productId: String): Product = productRepository.findById(productId)
 
+    @Transactional(isolation = Isolation.REPEATABLE_READ)
     fun makeReservation(
         productId: String,
         quantity: Int,
