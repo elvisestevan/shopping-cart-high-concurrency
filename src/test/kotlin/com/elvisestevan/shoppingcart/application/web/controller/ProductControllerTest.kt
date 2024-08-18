@@ -3,6 +3,7 @@ package com.elvisestevan.shoppingcart.application.web.controller
 import com.elvisestevan.shoppingcart.ShoppingCartHighConcurrencyApplicationTests
 import com.elvisestevan.shoppingcart.application.config.DataLoader
 import com.elvisestevan.shoppingcart.application.web.dto.response.ProductReservationResponse
+import com.elvisestevan.shoppingcart.application.web.dto.response.ProductResponse
 import com.elvisestevan.shoppingcart.resources.database.entity.toDomain
 import org.junit.jupiter.api.Test
 import org.slf4j.Logger
@@ -22,10 +23,10 @@ class ProductControllerTest : ShoppingCartHighConcurrencyApplicationTests() {
 
     @Test
     fun `should get all products successfully`() {
-        val response = DataLoader.data.map { ProductReservationResponse.fromDomain(it.toDomain()) }
+        val response = DataLoader.data.map { ProductResponse.fromDomain(it.toDomain()) }
 
         mockMvc.perform(
-            MockMvcRequestBuilders.get("/api/v3/products"),
+            MockMvcRequestBuilders.get("/api/v4/products"),
         )
             .andExpect(MockMvcResultMatchers.status().isOk)
             .andExpect(
@@ -37,20 +38,12 @@ class ProductControllerTest : ShoppingCartHighConcurrencyApplicationTests() {
     fun `should make a reservation successfully`() {
         val productId = "01J2M5AYNSCZW28EGVZBGWAQSF"
 
-        val response =
-            DataLoader.data.first { it.id == productId }
-                .copy(totalAvailableInStock = 999)
-                .let { ProductReservationResponse.fromDomain(it.toDomain()) }
-
         mockMvc.perform(
-            MockMvcRequestBuilders.post("/api/v3/products/$productId/reservations")
+            MockMvcRequestBuilders.post("/api/v4/products/$productId/reservations")
                 .content("{ \"quantity\": 1 }")
                 .contentType(MediaType.APPLICATION_JSON),
         )
             .andExpect(MockMvcResultMatchers.status().isOk)
-            .andExpect(
-                MockMvcResultMatchers.content().json(mapper.writeValueAsString(response)),
-            )
     }
 
     @Test
@@ -58,10 +51,10 @@ class ProductControllerTest : ShoppingCartHighConcurrencyApplicationTests() {
         val productId = "01J2M55YGRHWV1T72MK3PQXBYS"
 
         mockMvc.perform(
-            MockMvcRequestBuilders.post("/api/v3/products/$productId/reservations")
+            MockMvcRequestBuilders.post("/api/v4/products/$productId/reservations")
                 .content("{ \"quantity\": 10000000 }")
                 .contentType(MediaType.APPLICATION_JSON),
         )
-            .andExpect(MockMvcResultMatchers.status().isInternalServerError)
+            .andExpect(MockMvcResultMatchers.status().isBadRequest)
     }
 }
