@@ -1,6 +1,10 @@
 package com.elvisestevan.shoppingcart.resources.database.entity
 
-import jakarta.persistence.*
+import jakarta.persistence.Column
+import jakarta.persistence.Entity
+import jakarta.persistence.Id
+import jakarta.persistence.Table
+import jakarta.persistence.Version
 import org.hibernate.annotations.CreationTimestamp
 import org.hibernate.annotations.UpdateTimestamp
 import java.time.LocalDateTime
@@ -17,10 +21,6 @@ data class Product(
     val name: String,
     @Column
     val description: String,
-    @Column
-    val totalAvailableInStock: Int,
-    @Column
-    val totalInStock: Int,
     @CreationTimestamp
     val createdAt: LocalDateTime = now(),
     @UpdateTimestamp
@@ -34,8 +34,6 @@ data class Product(
                 id = product.id,
                 name = product.name,
                 description = product.description,
-                totalInStock = product.totalInStock,
-                totalAvailableInStock = product.totalAvailableInStock,
                 createdAt = product.createdAt,
                 updatedAt = product.updatedAt,
                 version = product.version,
@@ -48,8 +46,6 @@ fun Product.toDomain() =
         id = this.id,
         name = this.name,
         description = this.description,
-        totalInStock = this.totalInStock,
-        totalAvailableInStock = this.totalAvailableInStock,
         createdAt = this.createdAt,
         updatedAt = this.updatedAt,
         version = this.version,

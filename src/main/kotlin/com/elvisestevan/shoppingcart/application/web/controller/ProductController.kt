@@ -1,6 +1,7 @@
 package com.elvisestevan.shoppingcart.application.web.controller
 
 import com.elvisestevan.shoppingcart.application.web.dto.request.ReservationRequest
+import com.elvisestevan.shoppingcart.application.web.dto.response.ProductReservationResponse
 import com.elvisestevan.shoppingcart.application.web.dto.response.ProductResponse
 import com.elvisestevan.shoppingcart.domain.service.ProductService
 import io.micrometer.observation.annotation.Observed
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/api/v3/products")
+@RequestMapping("/api/v4/products")
 @Observed
 class ProductController(
     private val productService: ProductService,
@@ -37,11 +38,11 @@ class ProductController(
     fun makeReservation(
         @PathVariable productId: String,
         @RequestBody request: ReservationRequest,
-    ): ProductResponse {
+    ): ProductReservationResponse {
         log.info("Starting reservation for $productId of ${request.quantity} items")
         return productService.makeReservation(productId, request.quantity).let {
-            log.info("Reservation for $productId made successfully, ${it.totalAvailableInStock} remaining")
-            ProductResponse.fromDomain(it)
+            log.info("Reservation for $productId made successfully")
+            ProductReservationResponse.fromDomain(it)
         }
     }
 }

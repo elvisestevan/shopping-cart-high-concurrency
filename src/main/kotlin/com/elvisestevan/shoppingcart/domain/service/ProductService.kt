@@ -4,8 +4,8 @@ import com.elvisestevan.shoppingcart.domain.entity.Product
 import com.elvisestevan.shoppingcart.domain.entity.ProductReservation
 import com.elvisestevan.shoppingcart.domain.repository.ProductRepository
 import com.elvisestevan.shoppingcart.domain.repository.ProductReservationRepository
+import com.elvisestevan.shoppingcart.domain.repository.ProductStockRepository
 import de.huxhorn.sulky.ulid.ULID
-import io.github.resilience4j.retry.annotation.Retry
 import io.micrometer.observation.annotation.Observed
 import org.springframework.http.HttpStatusCode
 import org.springframework.stereotype.Service
@@ -17,30 +17,28 @@ import org.springframework.web.server.ResponseStatusException
 class ProductService(
     private val productRepository: ProductRepository,
     private val productReservationRepository: ProductReservationRepository,
+    private val productStockRepository: ProductStockRepository,
 ) {
     fun findAll(): List<Product> = productRepository.findAll()
 
     fun findById(productId: String): Product = productRepository.findById(productId)
 
     @Transactional
-    @Retry(name = "defaultRetry")
     fun makeReservation(
         productId: String,
         quantity: Int,
-    ): Product {
+    ): ProductReservation {
         val product = productRepository.findById(productId)
-        if (product.totalAvailableInStock < quantity) {
-            throw ResponseStatusException(
-                HttpStatusCode.valueOf(500),
-                "error on making reservation, total available is ${product.totalAvailableInStock} " +
-                    "and you're trying to make a reservation of $quantity items",
-            )
+        val productReservationId = ULID().nextULID()
+
+        val productReservation = productReservationRepository.save(ProductReservation(productReservationId, product, quantity))
+
+        val totalReserved = productStockRepository.makeReservationInStock(productReservation, product, quantity)
+
+        if (totalReserved < quantity) {
+            throw ResponseStatusException(HttpStatusCode.valueOf(400), "Product not available in stock")
         }
-        productReservationRepository.save(ProductReservation(ULID().nextULID(), product, quantity))
-        return productRepository.save(
-            product.copy(
-                totalAvailableInStock = product.totalAvailableInStock - quantity,
-            ),
-        )
+
+        return productReservation
     }
 }

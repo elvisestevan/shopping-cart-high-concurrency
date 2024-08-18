@@ -2,7 +2,7 @@ package com.elvisestevan.shoppingcart.application.web.controller
 
 import com.elvisestevan.shoppingcart.ShoppingCartHighConcurrencyApplicationTests
 import com.elvisestevan.shoppingcart.application.config.DataLoader
-import com.elvisestevan.shoppingcart.application.web.dto.response.ProductResponse
+import com.elvisestevan.shoppingcart.application.web.dto.response.ProductReservationResponse
 import com.elvisestevan.shoppingcart.resources.database.entity.toDomain
 import org.junit.jupiter.api.Test
 import org.slf4j.Logger
@@ -22,7 +22,7 @@ class ProductControllerTest : ShoppingCartHighConcurrencyApplicationTests() {
 
     @Test
     fun `should get all products successfully`() {
-        val response = DataLoader.data.map { ProductResponse.fromDomain(it.toDomain()) }
+        val response = DataLoader.data.map { ProductReservationResponse.fromDomain(it.toDomain()) }
 
         mockMvc.perform(
             MockMvcRequestBuilders.get("/api/v3/products"),
@@ -40,7 +40,7 @@ class ProductControllerTest : ShoppingCartHighConcurrencyApplicationTests() {
         val response =
             DataLoader.data.first { it.id == productId }
                 .copy(totalAvailableInStock = 999)
-                .let { ProductResponse.fromDomain(it.toDomain()) }
+                .let { ProductReservationResponse.fromDomain(it.toDomain()) }
 
         mockMvc.perform(
             MockMvcRequestBuilders.post("/api/v3/products/$productId/reservations")
