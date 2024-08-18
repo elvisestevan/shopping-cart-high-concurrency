@@ -25,6 +25,8 @@ services:
     image: grafana/loki
     extra_hosts: [ 'host.docker.internal:host-gateway' ]
     command: [ "-config.file=/etc/loki/local-config.yaml" ]
+    volumes:
+      - ./loki/local-config.yml:/etc/loki/local-config.yml
     ports:
       - "3100:3100"
     environment:
