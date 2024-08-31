@@ -8,8 +8,8 @@ import java.time.LocalDateTime.now
 import com.elvisestevan.shoppingcart.domain.entity.v3.Product as ProductDomain
 
 @Entity
-@Table(name = "product")
-data class Product(
+@Table(name = "product_v3")
+data class ProductV3(
     @Id
     @Column
     val id: String,
@@ -30,7 +30,7 @@ data class Product(
 ) {
     companion object {
         fun fromDomain(product: com.elvisestevan.shoppingcart.domain.entity.v3.Product) =
-            Product(
+            ProductV3(
                 id = product.id,
                 name = product.name,
                 description = product.description,
@@ -43,7 +43,7 @@ data class Product(
     }
 }
 
-fun Product.toDomain() =
+fun ProductV3.toDomain() =
     ProductDomain(
         id = this.id,
         name = this.name,

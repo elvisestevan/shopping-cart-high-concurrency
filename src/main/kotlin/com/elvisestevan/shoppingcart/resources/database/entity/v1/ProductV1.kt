@@ -7,8 +7,8 @@ import jakarta.persistence.Table
 import com.elvisestevan.shoppingcart.domain.entity.v1.Product as ProductDomain
 
 @Entity
-@Table(name = "product")
-data class Product(
+@Table(name = "product_v1")
+data class ProductV1(
     @Id
     @Column
     val id: String,
@@ -23,7 +23,7 @@ data class Product(
 ) {
     companion object {
         fun fromDomain(product: com.elvisestevan.shoppingcart.domain.entity.v1.Product) =
-            Product(
+            ProductV1(
                 id = product.id,
                 name = product.name,
                 description = product.description,
@@ -33,7 +33,7 @@ data class Product(
     }
 }
 
-fun Product.toDomain() =
+fun ProductV1.toDomain() =
     ProductDomain(
         id = this.id,
         name = this.name,

@@ -13,11 +13,5 @@ class ProductResponse(
                 description = product.description,
             )
 
-        fun fromDomain(product: com.elvisestevan.shoppingcart.domain.entity.v1.Product) =
-            ProductResponse(
-                id = product.id,
-                name = product.name,
-                description = product.description,
-            )
     }
 }

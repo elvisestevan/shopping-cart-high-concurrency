@@ -1,9 +1,9 @@
-package com.elvisestevan.shoppingcart.application.web.controller.v1
+package com.elvisestevan.shoppingcart.application.web.controller.v3
 
 import com.elvisestevan.shoppingcart.ShoppingCartHighConcurrencyApplicationTests
-import com.elvisestevan.shoppingcart.application.config.v1.DataLoaderV1
-import com.elvisestevan.shoppingcart.application.web.dto.response.v1.ProductResponse
-import com.elvisestevan.shoppingcart.resources.database.entity.v1.toDomain
+import com.elvisestevan.shoppingcart.application.config.v3.DataLoaderV3
+import com.elvisestevan.shoppingcart.application.web.dto.response.v3.ProductResponse
+import com.elvisestevan.shoppingcart.resources.database.entity.v3.toDomain
 import org.junit.jupiter.api.Test
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -12,20 +12,20 @@ import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 
-class ProductControllerTest : ShoppingCartHighConcurrencyApplicationTests() {
+class ProductControllerV3Test : ShoppingCartHighConcurrencyApplicationTests() {
     companion object {
-        private val log: Logger = LoggerFactory.getLogger(ProductControllerTest::class.java)
+        private val log: Logger = LoggerFactory.getLogger(ProductControllerV3Test::class.java)
     }
 
     @Autowired
-    private lateinit var productController: ProductController
+    private lateinit var productControllerV3: ProductControllerV3
 
     @Test
     fun `should get all products successfully`() {
-        val response = DataLoaderV1.data.map { ProductResponse.fromDomain(it.toDomain()) }
+        val response = DataLoaderV3.data.map { ProductResponse.fromDomain(it.toDomain()) }
 
         mockMvc.perform(
-            MockMvcRequestBuilders.get("/api/v1/products"),
+            MockMvcRequestBuilders.get("/api/v3/products"),
         )
             .andExpect(MockMvcResultMatchers.status().isOk)
             .andExpect(
@@ -38,11 +38,12 @@ class ProductControllerTest : ShoppingCartHighConcurrencyApplicationTests() {
         val productId = "01J2M5AYNSCZW28EGVZBGWAQSF"
 
         val response =
-            DataLoaderV1.data.first { it.id == productId }
+            DataLoaderV3.data.first { it.id == productId }
                 .copy(totalAvailableInStock = 999)
+                .let { ProductResponse.fromDomain(it.toDomain()) }
 
         mockMvc.perform(
-            MockMvcRequestBuilders.post("/api/v1/products/$productId/reservations")
+            MockMvcRequestBuilders.post("/api/v3/products/$productId/reservations")
                 .content("{ \"quantity\": 1 }")
                 .contentType(MediaType.APPLICATION_JSON),
         )
@@ -57,7 +58,7 @@ class ProductControllerTest : ShoppingCartHighConcurrencyApplicationTests() {
         val productId = "01J2M55YGRHWV1T72MK3PQXBYS"
 
         mockMvc.perform(
-            MockMvcRequestBuilders.post("/api/v1/products/$productId/reservations")
+            MockMvcRequestBuilders.post("/api/v3/products/$productId/reservations")
                 .content("{ \"quantity\": 10000000 }")
                 .contentType(MediaType.APPLICATION_JSON),
         )

@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service
 import org.springframework.web.server.ResponseStatusException
 
 @Service
-class ProductService(
+class ProductServiceV1(
     private val productRepository: ProductRepository,
-    private val productReservationRepository: ProductReservationRepository,
+    private val productReservationRepositoryImplV1: ProductReservationRepository,
 ) {
     fun findAll(): List<Product> = productRepository.findAll()
 
@@ -30,7 +30,7 @@ class ProductService(
                         "and you're trying to make a reservation of $quantity items",
             )
         }
-        productReservationRepository.save(ProductReservation(ULID().nextULID(), product, quantity))
+        productReservationRepositoryImplV1.save(ProductReservation(ULID().nextULID(), product, quantity))
         return productRepository.save(
             product.copy(
                 totalAvailableInStock = product.totalAvailableInStock - quantity,

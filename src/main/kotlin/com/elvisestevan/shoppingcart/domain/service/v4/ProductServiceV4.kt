@@ -14,7 +14,7 @@ import org.springframework.web.server.ResponseStatusException
 
 @Service
 @Observed
-class ProductService(
+class ProductServiceV4(
     private val productRepository: ProductRepository,
     private val productReservationRepository: ProductReservationRepository,
     private val productStockRepository: ProductStockRepository,

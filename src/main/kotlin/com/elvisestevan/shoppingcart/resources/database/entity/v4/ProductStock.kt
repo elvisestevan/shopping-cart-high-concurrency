@@ -15,10 +15,10 @@ data class ProductStock(
     val id: String,
     @JoinColumn(name = "product_id")
     @ManyToOne
-    val product: Product,
+    val productV4: ProductV4,
     @JoinColumn(name = "product_reservation_id", nullable = true)
     @ManyToOne
-    val productReservation: ProductReservation? = null,
+    val productReservationV4: ProductReservationV4? = null,
     @CreationTimestamp
     val createdAt: LocalDateTime = now(),
     @UpdateTimestamp
@@ -28,8 +28,8 @@ data class ProductStock(
         fun fromDomain(productStock: com.elvisestevan.shoppingcart.domain.entity.v4.ProductStock) =
             ProductStock(
                 id = productStock.id,
-                product = Product.fromDomain(productStock.product),
-                productReservation = productStock.productReservation?.let { ProductReservation.fromDomain(it) },
+                productV4 = ProductV4.fromDomain(productStock.product),
+                productReservationV4 = productStock.productReservation?.let { ProductReservationV4.fromDomain(it) },
                 createdAt = productStock.createdAt,
                 updatedAt = productStock.updatedAt,
             )
@@ -39,8 +39,8 @@ data class ProductStock(
 fun ProductStock.toDomain() =
     ProductStockDomain(
         id = this.id,
-        product = this.product.toDomain(),
-        productReservation = this.productReservation?.toDomain(),
+        product = this.productV4.toDomain(),
+        productReservation = this.productReservationV4?.toDomain(),
         createdAt = this.createdAt,
         updatedAt = this.updatedAt,
     )

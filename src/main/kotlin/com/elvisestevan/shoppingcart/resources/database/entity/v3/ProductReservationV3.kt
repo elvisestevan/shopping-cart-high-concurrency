@@ -1,36 +1,36 @@
-package com.elvisestevan.shoppingcart.resources.database.entity.v4
+package com.elvisestevan.shoppingcart.resources.database.entity.v3
 
 import jakarta.persistence.*
 import org.hibernate.annotations.CreationTimestamp
 import java.time.LocalDateTime
 
 @Entity
-@Table(name = "product_reservation")
-data class ProductReservation(
+@Table(name = "product_reservation_v3")
+data class ProductReservationV3(
     @Id
     @Column
     val id: String,
     @JoinColumn(name = "product_id")
     @ManyToOne
-    val product: Product,
+    val product: ProductV3,
     @Column
     val quantity: Int,
     @CreationTimestamp
     val createdAt: LocalDateTime,
 ) {
     companion object {
-        fun fromDomain(productReservation: com.elvisestevan.shoppingcart.domain.entity.v4.ProductReservation) =
-            ProductReservation(
+        fun fromDomain(productReservation: com.elvisestevan.shoppingcart.domain.entity.v3.ProductReservation) =
+            ProductReservationV3(
                 id = productReservation.id,
-                product = Product.fromDomain(productReservation.product),
+                product = ProductV3.fromDomain(productReservation.product),
                 quantity = productReservation.quantity,
                 createdAt = productReservation.createdAt,
             )
     }
 }
 
-fun ProductReservation.toDomain() =
-    com.elvisestevan.shoppingcart.domain.entity.v4.ProductReservation(
+fun ProductReservationV3.toDomain() =
+    com.elvisestevan.shoppingcart.domain.entity.v3.ProductReservation(
         id = this.id,
         product = this.product.toDomain(),
         quantity = this.quantity,

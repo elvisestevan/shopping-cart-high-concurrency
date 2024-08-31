@@ -12,13 +12,13 @@ import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 
-class ProductControllerTest : ShoppingCartHighConcurrencyApplicationTests() {
+class ProductControllerV4Test : ShoppingCartHighConcurrencyApplicationTests() {
     companion object {
-        private val log: Logger = LoggerFactory.getLogger(ProductControllerTest::class.java)
+        private val log: Logger = LoggerFactory.getLogger(ProductControllerV4Test::class.java)
     }
 
     @Autowired
-    private lateinit var productController: ProductController
+    private lateinit var productControllerV4: ProductControllerV4
 
     @Test
     fun `should get all products successfully`() {

@@ -1,10 +1,11 @@
-package com.elvisestevan.shoppingcart.domain.service.v2
+package com.elvisestevan.shoppingcart.domain.service.v3
 
-import com.elvisestevan.shoppingcart.domain.entity.v1.Product
-import com.elvisestevan.shoppingcart.domain.entity.v1.ProductReservation
-import com.elvisestevan.shoppingcart.domain.repository.v1.ProductRepository
-import com.elvisestevan.shoppingcart.domain.repository.v1.ProductReservationRepository
+import com.elvisestevan.shoppingcart.domain.entity.v3.Product
+import com.elvisestevan.shoppingcart.domain.entity.v3.ProductReservation
+import com.elvisestevan.shoppingcart.domain.repository.v3.ProductRepository
+import com.elvisestevan.shoppingcart.domain.repository.v3.ProductReservationRepository
 import de.huxhorn.sulky.ulid.ULID
+import io.github.resilience4j.retry.annotation.Retry
 import io.micrometer.observation.annotation.Observed
 import org.springframework.http.HttpStatusCode
 import org.springframework.stereotype.Service
@@ -13,15 +14,16 @@ import org.springframework.web.server.ResponseStatusException
 
 @Service
 @Observed
-class ProductService(
+class ProductServiceV3(
     private val productRepository: ProductRepository,
-    private val productReservationRepository: ProductReservationRepository,
+    private val productReservationRepositoryImplV3: ProductReservationRepository,
 ) {
     fun findAll(): List<Product> = productRepository.findAll()
 
     fun findById(productId: String): Product = productRepository.findById(productId)
 
     @Transactional
+    @Retry(name = "defaultRetry")
     fun makeReservation(
         productId: String,
         quantity: Int,
@@ -34,7 +36,7 @@ class ProductService(
                         "and you're trying to make a reservation of $quantity items",
             )
         }
-        productReservationRepository.save(ProductReservation(ULID().nextULID(), product, quantity))
+        productReservationRepositoryImplV3.save(ProductReservation(ULID().nextULID(), product, quantity))
         return productRepository.save(
             product.copy(
                 totalAvailableInStock = product.totalAvailableInStock - quantity,

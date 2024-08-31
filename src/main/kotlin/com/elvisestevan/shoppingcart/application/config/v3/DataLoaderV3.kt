@@ -1,48 +1,52 @@
-package com.elvisestevan.shoppingcart.application.config.v1
+package com.elvisestevan.shoppingcart.application.config.v3
 
-import com.elvisestevan.shoppingcart.resources.database.entity.v1.ProductV1
-import com.elvisestevan.shoppingcart.resources.database.repository.jpa.v1.ProductJPARepositoryV1
+import com.elvisestevan.shoppingcart.resources.database.entity.v3.ProductV3
+import com.elvisestevan.shoppingcart.resources.database.repository.jpa.v3.ProductJPARepositoryV3
 import org.springframework.boot.CommandLineRunner
 import org.springframework.stereotype.Component
 
 @Component
-class DataLoaderV1(
-    private val productRepository: ProductJPARepositoryV1,
+class DataLoaderV3(
+    private val productRepository: ProductJPARepositoryV3,
 ) : CommandLineRunner {
     companion object {
         val data =
             listOf(
-                ProductV1(
+                ProductV3(
                     "01J2M55YGRHWV1T72MK3PQXBYS",
                     "Keyboard",
                     "Keyboard with QWERTY layout and low-profile keys for a comfortable, quiet typing experience",
                     1000,
                     1000,
+                    version = 1,
                 ),
-                ProductV1(
+                ProductV3(
                     "01J2M5AYNSCZW28EGVZBGWAQSF",
                     "Mouse",
                     "Computer mouse for easily navigating a computer interface; click, scroll, and more",
                     1000,
                     1000,
+                    version = 1,
                 ),
-                ProductV1(
+                ProductV3(
                     "01J2M5B20RCGYRDMEHSG5NFY1H",
                     "Monitor",
                     "Full HD monitor with 1920x1080 resolution and AOC brand technology; ideal for webinars, " +
                             "meetings, digital work, entertainment, and more",
-                    10000000,
-                    10000000,
+                    60000,
+                    60000,
+                    version = 1,
                 ),
-                ProductV1(
+                ProductV3(
                     "01J2M5B4XR1XGSWRXB5BXTGMHA",
                     "Headphone",
                     "Collapsible Feature: Take your wired headphones wherever you go. Just fold them up, " +
                             "twist up the cord, and be on your merry way",
                     10000000,
                     10000000,
+                    version = 1,
                 ),
-                ProductV1(
+                ProductV3(
                     "01J2M5B8B8FPS2SFS5MHS6K0SP",
                     "Printer",
                     "The OfficeJet Pro 8135e is perfect for home offices printing professional-quality color " +
@@ -50,6 +54,7 @@ class DataLoaderV1(
                             "20 ppm black",
                     10000000,
                     10000000,
+                    version = 1,
                 ),
             )
     }

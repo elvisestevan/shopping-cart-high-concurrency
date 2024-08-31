@@ -1,9 +1,8 @@
-package com.elvisestevan.shoppingcart.application.web.controller.v3
+package com.elvisestevan.shoppingcart.application.web.controller.v1
 
 import com.elvisestevan.shoppingcart.application.web.dto.request.ReservationRequest
-import com.elvisestevan.shoppingcart.application.web.dto.response.v3.ProductResponse
-import com.elvisestevan.shoppingcart.domain.service.v3.ProductService
-import io.micrometer.observation.annotation.Observed
+import com.elvisestevan.shoppingcart.application.web.dto.response.v1.ProductResponse
+import com.elvisestevan.shoppingcart.domain.service.v1.ProductServiceV1
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.web.bind.annotation.GetMapping
@@ -14,24 +13,23 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/api/v3/products")
-@Observed
-class ProductController(
-    private val productServiceV3: ProductService,
+@RequestMapping("/api/v1/products")
+class ProductControllerV1(
+    private val productServiceV1: ProductServiceV1,
 ) {
     companion object {
-        private val log: Logger = LoggerFactory.getLogger(ProductController::class.java)
+        private val log: Logger = LoggerFactory.getLogger(ProductControllerV1::class.java)
     }
 
     @GetMapping
     fun getProducts(): List<ProductResponse> {
-        return productServiceV3.findAll().map { ProductResponse.fromDomain(it) }
+        return productServiceV1.findAll().map { ProductResponse.fromDomain(it) }
     }
 
     @GetMapping("/{productId}")
     fun getProduct(
         @PathVariable productId: String,
-    ): ProductResponse = productServiceV3.findById(productId).let { ProductResponse.fromDomain(it) }
+    ): ProductResponse = productServiceV1.findById(productId).let { ProductResponse.fromDomain(it) }
 
     @PostMapping("/{productId}/reservations")
     fun makeReservation(
@@ -39,8 +37,8 @@ class ProductController(
         @RequestBody request: ReservationRequest,
     ): ProductResponse {
         log.info("Starting reservation for $productId of ${request.quantity} items")
-        return productServiceV3.makeReservation(productId, request.quantity).let {
-            log.info("Reservation for $productId made successfully")
+        return productServiceV1.makeReservation(productId, request.quantity).let {
+            log.info("Reservation for $productId made successfully, ${it.totalAvailableInStock} remaining")
             ProductResponse.fromDomain(it)
         }
     }

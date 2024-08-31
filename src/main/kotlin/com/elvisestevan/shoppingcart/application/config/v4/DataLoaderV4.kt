@@ -1,8 +1,8 @@
 package com.elvisestevan.shoppingcart.application.config.v4
 
-import com.elvisestevan.shoppingcart.resources.database.entity.v4.Product
+import com.elvisestevan.shoppingcart.resources.database.entity.v4.ProductV4
 import com.elvisestevan.shoppingcart.resources.database.entity.v4.ProductStock
-import com.elvisestevan.shoppingcart.resources.database.repository.jpa.v4.ProductJPARepository
+import com.elvisestevan.shoppingcart.resources.database.repository.jpa.v4.ProductJPARepositoryV4
 import com.elvisestevan.shoppingcart.resources.database.repository.jpa.ProductStockJPARepository
 import de.huxhorn.sulky.ulid.ULID
 import org.springframework.boot.CommandLineRunner
@@ -10,25 +10,25 @@ import org.springframework.stereotype.Component
 
 @Component
 class DataLoaderV4(
-    private val productRepository: ProductJPARepository,
+    private val productRepository: ProductJPARepositoryV4,
     private val productStockJPARepository: ProductStockJPARepository,
 ) : CommandLineRunner {
     companion object {
         val data =
             listOf(
-                Product(
+                ProductV4(
                     id = "01J2M55YGRHWV1T72MK3PQXBYS",
                     name = "Keyboard",
                     description = "Keyboard with QWERTY layout and low-profile keys for a comfortable, quiet typing experience",
                     version = 1,
                 ),
-                Product(
+                ProductV4(
                     id = "01J2M5AYNSCZW28EGVZBGWAQSF",
                     name = "Mouse",
                     description = "Computer mouse for easily navigating a computer interface; click, scroll, and more",
                     version = 1,
                 ),
-                Product(
+                ProductV4(
                     id = "01J2M5B20RCGYRDMEHSG5NFY1H",
                     name = "Monitor",
                     description =
@@ -36,7 +36,7 @@ class DataLoaderV4(
                             "meetings, digital work, entertainment, and more",
                     version = 1,
                 ),
-                Product(
+                ProductV4(
                     id = "01J2M5B4XR1XGSWRXB5BXTGMHA",
                     name = "Headphone",
                     description =
@@ -44,7 +44,7 @@ class DataLoaderV4(
                             "twist up the cord, and be on your merry way",
                     version = 1,
                 ),
-                Product(
+                ProductV4(
                     id = "01J2M5B8B8FPS2SFS5MHS6K0SP",
                     name = "Printer",
                     description =
@@ -65,7 +65,7 @@ class DataLoaderV4(
                 (1..6000).map {
                     ProductStock(
                         id = ULID().nextULID(),
-                        product = product,
+                        productV4 = product,
                     )
                 }
             productStockJPARepository.saveAll(stock)
