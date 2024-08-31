@@ -1,7 +1,7 @@
 package com.elvisestevan.shoppingcart.domain.repository
 
-import com.elvisestevan.shoppingcart.domain.entity.Product
-import com.elvisestevan.shoppingcart.domain.entity.ProductReservation
+import com.elvisestevan.shoppingcart.domain.entity.v4.Product
+import com.elvisestevan.shoppingcart.domain.entity.v4.ProductReservation
 
 interface ProductStockRepository {
     fun makeReservationInStock(

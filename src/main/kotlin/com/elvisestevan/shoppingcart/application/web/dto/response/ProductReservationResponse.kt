@@ -1,6 +1,7 @@
 package com.elvisestevan.shoppingcart.application.web.dto.response
 
-import com.elvisestevan.shoppingcart.domain.entity.ProductReservation
+import com.elvisestevan.shoppingcart.application.web.dto.response.v4.ProductResponse
+import com.elvisestevan.shoppingcart.domain.entity.v4.ProductReservation
 import java.time.LocalDateTime
 
 class ProductReservationResponse(

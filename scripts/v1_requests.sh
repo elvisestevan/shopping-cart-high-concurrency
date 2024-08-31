@@ -1,6 +1,6 @@
 #!/bin/bash
 
-URL='http://localhost:7000/api/v1/products/01J2M55YGRHWV1T72MK3PQXBYS/reservations'
+URL='http://localhost:7000/api/v1/products/01J2M5B20RCGYRDMEHSG5NFY1H/reservations'
 
 if [ -z "$1" ]; then
   echo "Usage: $0 <number_of_requests>"

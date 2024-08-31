@@ -1,6 +1,6 @@
 package com.elvisestevan.shoppingcart.resources.database.repository.jpa
 
-import com.elvisestevan.shoppingcart.resources.database.entity.ProductStock
+import com.elvisestevan.shoppingcart.resources.database.entity.v4.ProductStock
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Modifying
 import org.springframework.data.jpa.repository.Query
