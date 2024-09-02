@@ -16,8 +16,8 @@ class DataLoaderV1(
                     "01J2M55YGRHWV1T72MK3PQXBYS",
                     "Keyboard",
                     "Keyboard with QWERTY layout and low-profile keys for a comfortable, quiet typing experience",
-                    1000,
-                    1000,
+                    6000,
+                    6000,
                 ),
                 ProductV1(
                     "01J2M5AYNSCZW28EGVZBGWAQSF",

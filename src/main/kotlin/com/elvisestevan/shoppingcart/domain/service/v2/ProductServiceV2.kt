@@ -14,19 +14,19 @@ import org.springframework.web.server.ResponseStatusException
 @Service
 @Observed
 class ProductServiceV2(
-    private val productRepository: ProductRepository,
+    private val productRepositoryImplV2: ProductRepository,
     private val productReservationRepositoryImplV1: ProductReservationRepository,
 ) {
-    fun findAll(): List<Product> = productRepository.findAll()
+    fun findAll(): List<Product> = productRepositoryImplV2.findAll()
 
-    fun findById(productId: String): Product = productRepository.findById(productId)
+    fun findById(productId: String): Product = productRepositoryImplV2.findById(productId)
 
     @Transactional
     fun makeReservation(
         productId: String,
         quantity: Int,
     ): Product {
-        val product = productRepository.findById(productId)
+        val product = productRepositoryImplV2.findById(productId)
         if (product.totalAvailableInStock < quantity) {
             throw ResponseStatusException(
                 HttpStatusCode.valueOf(500),
@@ -35,7 +35,7 @@ class ProductServiceV2(
             )
         }
         productReservationRepositoryImplV1.save(ProductReservation(ULID().nextULID(), product, quantity))
-        return productRepository.save(
+        return productRepositoryImplV2.save(
             product.copy(
                 totalAvailableInStock = product.totalAvailableInStock - quantity,
             ),
